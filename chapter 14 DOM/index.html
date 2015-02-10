@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Моя домашняя страничка</title>
+	<link rel="stylesheet" href="">
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body onload="test()">
+	<h1> Моя домашняя страничка </h1>
+    <p>Привет, я Марийн и это моя домашняя страничка.</p>
+    <p>А ещё я книжку написал! Читайте её
+  	<a id="link" href="http://eloquentjavascript.net">здесь</a>.</p>
+  	<p>Один</p>
+	<p>Два</p>
+	<p>Три</p>
+	<p>Это <img src="cat.png" alt="Кошка"> в 
+		<img src="hat.png" alt="сапожках">
+	</p>	
+
+	<p>
+		<button onclick="replaceImages()">Заменить</button>
+	</p>
+
+  <blockquote  id="quote">
+    Никакая книга не может быть закончена. Во время работы над ней мы узнаём достаточно для того, чтобы найти её незрелой сразу же после того, как мы отвлеклись от неё.
+  </blockquote>		
+
+  <p data-classified="secret">Код запуска 00000000.</p>
+  <p data-classified="unclassified">У кошки четыре ноги.</p>
+
+  	<script>
+  		var link = document.getElementById("link");
+  		console.log(link.href);
+
+  		function nodeTest() {
+  			var paragraphs = document.body.getElementsByTagName("p");
+  			document.body.insertBefore(paragraphs[4], paragraphs[2]);
+  		}
+
+  		function replaceImages() {
+  			var images = document.body.getElementsByTagName("img");
+  			for (var i = images.length - 1; i >= 0; i--) {
+  				var image = images[i];
+  				if (image.alt) {
+  					var text = document.createTextNode(image.alt);
+  					image.parentNode.replaceChild(text, image);
+  				}
+  			}
+  		}
+
+      function elt(type) {
+        var node = document.createElement(type);
+        for (var i = 1; i < arguments.length; i++) {
+          var child = arguments[i];
+          if (typeof child === "string") {
+            child = document.createTextNode(child);
+          }
+          node.appendChild(child);
+        }
+
+        return node;
+      }
+
+      function eltTest() {
+        document.getElementById("quote").appendChild(
+          elt("footer", "-",
+            elt("strong", "Карл Поппер"),
+            ", предисловие ко второму изданию ",
+            elt("em", "Открытое общество и его враги "),
+            ", 1950"));
+      }
+
+      function attributeTest() {
+        var paras = document.body.getElementsByTagName("p");
+        Array.prototype.forEach.call(paras, function(para) {
+          if (para.getAttribute("data-classified") === "secret") {
+            para.parentNode.removeChild(para);
+          }
+        });
+      }
+
+  		attributeTest();
+  	</script>
+</body>
+</html>
