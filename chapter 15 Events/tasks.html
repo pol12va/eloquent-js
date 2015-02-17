@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<input type="text">
+	<img src="cat.png" class="trail">
+	<!-- <img src="hat.png" class="trail"> -->
+	<style>
+	  .trail { /* className для элементов, летящих за курсором */
+	    position: absolute;
+	    height: 6px; width: 6px;
+	    border-radius: 3px;
+	    background: teal;
+	  }
+	  body {
+	    height: 300px;
+	  }
+	</style>
+	<script type="text/javascript">
+		var input = document.querySelector("input");
+		input.addEventListener("keydown", function(event) {
+			if (event.which === 81
+				|| event.which === 87
+				|| event.which === 88) {
+				event.preventDefault();
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		var images = document.querySelectorAll(".trail");
+		addEventListener("mousemove", function(event) {
+			for (var i = 0; i < images.length; i++) {
+				images[i].style.left = event.pageX + 20 + "px";
+				images[i].style.top = event.pageY + 40 + "px";
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<p>Переместите мышь для увеличения ширины:</p>
+	<div style="background: orange; width: 60px; height: 20px"></div>
+
+	<script type="text/javascript">
+		var lastX;
+		var rect = document.querySelector("div");
+		rect.addEventListener("mousedown", function(event) {
+			if (event.which === 1) {
+				lastX = event.pageX;
+				addEventListener("mousemove", moved);
+				event.preventDefault();
+			}
+		});
+
+		function moved(event) {
+			if (event.which != 1) {
+				removeEventListener("mousemove", moved);
+			} else {
+				var dist = event.pageX - lastX;
+				var newWidth = Math.max(10, rect.offsetWidth + dist);
+				rect.style.width = newWidth + "px";
+				lastX = event.pageX;
+			}
+		}
+	</script>
+</body>
+</html>
